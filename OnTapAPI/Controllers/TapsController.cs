@@ -9,5 +9,10 @@ namespace OnTapAPI.Controllers
     [Route("api/[controller]")]
     public class TapsController : Controller
     {
+		[HttpGet] // GET api/values
+		public IEnumerable<string> Get()
+		{
+			return new string[] { "tap1", "tap2" };
+		}
     }
 }
