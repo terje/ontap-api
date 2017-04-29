@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Razor.Chunks.Generators;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
 
 namespace OnTapAPI
 {
@@ -19,6 +21,7 @@ namespace OnTapAPI
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -29,6 +32,7 @@ namespace OnTapAPI
         {
             // Add framework services.
             services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +40,11 @@ namespace OnTapAPI
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseResponseBuffering();
+
+            app.UseCors(builder =>
+                builder.WithOrigins("*"));
 
             app.UseMvc();
         }
