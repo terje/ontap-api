@@ -33,8 +33,8 @@ namespace OnTapAPI
             // Add framework services.
             services.AddMvc();
             services.AddCors();
-            services.AddOptions();
 
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
