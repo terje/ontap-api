@@ -16,7 +16,7 @@ namespace OnTapAPI.Repository
         private string connectionString;
         public TapRepository(IConfiguration configuration)
         {
-            connectionString = $"Data Source={configuration.GetValue<string>("DB:FileName")}";
+            connectionString = $"Data Source={configuration.GetValue<string>("DB:File")}";
         }
 
         public IDbConnection Connection

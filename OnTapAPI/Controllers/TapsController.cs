@@ -1,19 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OnTapAPI.Repository;
+using OnTapAPI.Models;
 
 namespace OnTapAPI.Controllers
 {
     [Route("api/[controller]")]
     public class TapsController : Controller
     {
+        private readonly TapRepository tapRepository;
+
+        public TapsController(IConfiguration configuration)
+        {
+            tapRepository = new TapRepository(configuration);
+        }
+
 		// GET api/taps
 		[HttpGet]
-		public IEnumerable<string> Get()
+		public IEnumerable<Tap> Get()
 		{
-			return new string[] { "tap1", "tap2", "tap3" };
+            return tapRepository.GetAll();
+			//return new string[] { "tap1", "tap2", "tap3" };
 		}
 
 		// GET api/taps/5
