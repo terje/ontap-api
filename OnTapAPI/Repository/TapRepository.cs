@@ -31,8 +31,8 @@ namespace OnTapAPI.Repository
 		{
 			using (IDbConnection dbConnection = Connection)
 			{
-				string sQuery = "INSERT INTO taps (Name, Quantity, Price)"
-								+ " VALUES(@Name, @Quantity, @Price)";
+				string sQuery = "INSERT INTO taps (kegId, position, flowId)"
+								+ " VALUES(@kegIg, @position, @flowId)";
 				dbConnection.Open();
 				dbConnection.Execute(sQuery, tap);
 			}
@@ -51,8 +51,8 @@ namespace OnTapAPI.Repository
 		{
 			using (IDbConnection dbConnection = Connection)
 			{
-				string sQuery = "SELECT * FROM Products"
-							   + " WHERE ProductId = @Id";
+				string sQuery = "SELECT * FROM taps"
+							   + " WHERE id = @Id";
 				dbConnection.Open();
 				return dbConnection.Query<Tap>(sQuery, new { Id = id }).FirstOrDefault();
 			}
@@ -63,7 +63,7 @@ namespace OnTapAPI.Repository
 			using (IDbConnection dbConnection = Connection)
 			{
 				string sQuery = "DELETE FROM Taps"
-							 + " WHERE tapId = @Id";
+							 + " WHERE id = @Id";
 				dbConnection.Open();
 				dbConnection.Execute(sQuery, new { Id = id });
 			}
@@ -73,9 +73,9 @@ namespace OnTapAPI.Repository
 		{
 			using (IDbConnection dbConnection = Connection)
 			{
-				string sQuery = "UPDATE Products SET Name = @Name,"
-							   + " Quantity = @Quantity, Price= @Price"
-							   + " WHERE ProductId = @ProductId";
+				string sQuery = "UPDATE Products SET kegId = @kegId,"
+							   + " position = @position, flowId = @flowId"
+							   + " WHERE id = @id";
 				dbConnection.Open();
 				dbConnection.Query(sQuery, tap);
 			}
