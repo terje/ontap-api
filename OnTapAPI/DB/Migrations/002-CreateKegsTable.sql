@@ -1,1 +1,1 @@
-﻿CREATE TABLE IF NOT EXISTS 'kegs' (kegId, name, description, og, fg, kcal, abv, srm);
+﻿CREATE TABLE IF NOT EXISTS kegs(id INTEGER PRIMARY KEY ASC, name, description, og, fg, kcal, abv, srm);

@@ -1,1 +1,1 @@
-﻿CREATE TABLE IF NOT EXISTS 'taps' (tapId, kegId, position, flowId);
+﻿CREATE TABLE IF NOT EXISTS taps(id INTEGER PRIMARY KEY ASC, kegId, position, flowId);
