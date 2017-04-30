@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,6 +33,8 @@ namespace OnTapAPI
             // Add framework services.
             services.AddMvc();
             services.AddCors();
+            services.AddOptions();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +49,9 @@ namespace OnTapAPI
                 builder.WithOrigins("*"));
 
             app.UseMvc();
+
+			Utils.DB.SetupDB();
+			Utils.DB.Migrate();
         }
     }
 }
